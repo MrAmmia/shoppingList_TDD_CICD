@@ -100,7 +100,7 @@ jobs:
       - name: Run UI tests
         uses: reactivecircus/android-emulator-runner@v2
         with:
-          api-level: ${{ env.SDK_VERSION }}
+          api-level: 34
           target: default
           arch: x86_64
           profile: Nexus 6
@@ -117,6 +117,12 @@ jobs:
     needs: [instrumentation-test]
     name: Generate APK
     runs-on: ubuntu-latest
+
+    env:
+      SDK_VERSION: 33
+      JDK_VERSION: 17
+      ANDROID_HOME: /usr/local/android-sdk
+
     steps:
       - name: Checkout repository
         uses: actions/checkout@v2
