@@ -123,15 +123,15 @@ jobs:
           target: google_apis
           arch: x86_64
           profile: Nexus 5X
+          script: ./gradlew connectedAndroidTest
           disable-animations: true
           emulator-options: -no-boot-anim -no-window
           working-directory: ${{ github.workspace }}
           adb-install-timeout-minutes: 8
           boot-timeout-minutes: 8
 
-      - name: Run UI tests
-        run: ./gradlew connectedAndroidTest
-      #        uses: reactivecircus/android-emulator-runner@v2
+#      - name: Run UI tests
+#        uses: reactivecircus/android-emulator-runner@v2
 #        with:
 #          api-level: 34
 #          target: default
