@@ -103,7 +103,7 @@ jobs:
           api-level: 34
           target: google_apis
           arch: x86_64
-          profile: Pixel_3
+          profile: Nexus 6
           script: ./gradlew connectedAndroidTest
           disable-animations: true
           emulator-options: -no-boot-anim -no-window
