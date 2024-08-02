@@ -109,11 +109,11 @@ jobs:
           distribution: 'adopt'
           java-version: ${{ env.JDK_VERSION }}
 
-      #- name: Set up Android SDK
-      #  run: |
-      #    brew install --cask android-sdk
-      #    yes | sdkmanager --licenses
-      #    sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
+      - name: Set up Android SDK
+        run: |
+          brew install --cask android-sdk
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
       
 
 #      - name: Start emulator
