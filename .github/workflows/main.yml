@@ -108,17 +108,17 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-#      - name: Set up JDK 17
-#        uses: actions/setup-java@v2
-#        with:
-#          distribution: 'adopt'
-#          java-version: ${{ env.JDK_VERSION }}
-#
-#      - name: Set up Android SDK
-#        run: |
-#          brew install --cask android-sdk
-#          yes | sdkmanager --licenses
-#          sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          distribution: 'adopt'
+          java-version: ${{ env.JDK_VERSION }}
+
+      - name: Set up Android SDK
+        run: |
+          brew install --cask android-sdk
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
       
 
 #      - name: Start emulator
