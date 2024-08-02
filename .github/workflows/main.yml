@@ -97,12 +97,12 @@ jobs:
 
   instrumentation-test:
     needs: [ unit-test ]
-    runs-on: macos-latest
+    runs-on: ubuntu-latest
 
-    env:
-      SDK_VERSION: 33
-      JDK_VERSION: 17
-      ANDROID_HOME: $HOME/Library/Android/sdk
+#    env:
+#      SDK_VERSION: 33
+#      JDK_VERSION: 17
+#      ANDROID_HOME: $HOME/Library/Android/sdk
 
     steps:
       - name: Checkout repository
@@ -124,7 +124,24 @@ jobs:
         run: |
           yes | sdkmanager --install "system-images;android-33;google_apis;x86_64" --channel=0
 
-#      - name: Set up Android SDK
+      - name: Create AVD
+        run: avdmanager create avd -n test -k 'system-images;android-30;google_apis;x86_64' --force
+
+      - name: Start AVD
+        run: |
+          nohup emulator -avd test -no-audio -no-window -gpu swiftshader_indirect -no-boot-anim -accel on &
+          adb wait-for-device
+          adb shell input keyevent 82 &
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          DISPLAY: :0
+
+      - name: Wait for emulator to boot
+        run: |
+          adb shell getprop sys.boot_completed | grep -m 1 '1'
+          adb shell input keyevent 82
+
+      #      - name: Set up Android SDK
 #        run: |
 #          brew install --cask android-sdk
 #          yes | sdkmanager --licenses
@@ -145,11 +162,18 @@ jobs:
 #          adb-install-timeout-minutes: 8
 #          boot-timeout-minutes: 8
 
-      - name: Run UI tests
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: 34
-          script: ./gradlew connectedCheck
+#      - name: Run UI tests
+#        uses: reactivecircus/android-emulator-runner@v2
+#        with:
+#          api-level: 34
+#          script: ./gradlew connectedCheck
+
+      - name: Run Instrumented Tests
+        run: ./gradlew connectedAndroidTest
+        env:
+          ANDROID_HOME: ${{ env.ANDROID_HOME }}
+          JAVA_HOME: ${{ steps.setup-java.outputs.java-home }}
+
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
