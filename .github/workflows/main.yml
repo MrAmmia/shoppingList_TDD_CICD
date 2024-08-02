@@ -125,7 +125,7 @@ jobs:
           yes | sdkmanager --install "system-images;android-33;google_apis;x86_64" --channel=0
 
       - name: Create AVD
-        run: avdmanager create avd -n test -k 'system-images;android-33;google_apis;x86_64' --force
+        run: echo no | avdmanager create avd -n test -k 'system-images;android-33;google_apis;x86_64' --force
 
       - name: Start AVD
         run: |
