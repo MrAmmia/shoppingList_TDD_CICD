@@ -121,7 +121,7 @@ jobs:
           sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
           sdkmanager "extras;oracle;m2repository"
           mkdir -p ~/.m2/repository/com/sun/xml/bind
-          cp -r $ANDROID_HOME/extras/oracle/m2repository/com/sun/xml/bind/* ~/.m2/repository/com/sun/xml/bind/
+          cp -r ${{ env.ANDROID_HOME }}/extras/oracle/m2repository/com/sun/xml/bind/* ~/.m2/repository/com/sun/xml/bind/
 
 #      - name: Start emulator
 #        uses: reactivecircus/android-emulator-runner@v2
