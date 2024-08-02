@@ -116,28 +116,28 @@ jobs:
       #    sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
       
 
-      - name: Start emulator
-        uses: reactivecircus/android-emulator-runner@v2
-        with:
-          api-level: ${{ env.SDK_VERSION }}
-          target: google_apis
-          arch: x86_64
-          profile: Nexus 5X
-          script: ./gradlew connectedAndroidTest
-          disable-animations: true
-          emulator-options: -no-boot-anim -no-window
-          working-directory: ${{ github.workspace }}
-          adb-install-timeout-minutes: 8
-          boot-timeout-minutes: 8
-
-#      - name: Run UI tests
+#      - name: Start emulator
 #        uses: reactivecircus/android-emulator-runner@v2
 #        with:
-#          api-level: 34
-#          target: default
+#         api-level: ${{ env.SDK_VERSION }}
+#          target: google_apis
 #          arch: x86_64
-#          profile: Nexus 6
-#          script: ./gradlew connectedCheck
+#          profile: Nexus 5X
+#          script: ./gradlew connectedAndroidTest
+#          disable-animations: true
+#          emulator-options: -no-boot-anim -no-window
+#          working-directory: ${{ github.workspace }}
+#          adb-install-timeout-minutes: 8
+#          boot-timeout-minutes: 8
+
+      - name: Run UI tests
+        uses: reactivecircus/android-emulator-runner@v2
+        with:
+          api-level: 34
+          target: default
+          arch: x86_64
+          profile: Nexus 6
+          script: ./gradlew connectedCheck
 
       - name: Upload test report
         uses: actions/upload-artifact@v2
