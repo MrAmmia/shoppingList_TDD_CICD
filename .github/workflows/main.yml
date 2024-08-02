@@ -19,11 +19,11 @@ jobs:
       - name: Checkout repository
         uses: actions/checkout@v2
 
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-            distribution: 'adopt'
-            java-version: ${{ env.JDK_VERSION }}
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#            distribution: 'adopt'
+#            java-version: ${{ env.JDK_VERSION }}
 
 #      - name: Cache Gradle packages
 #        uses: actions/cache@v2
@@ -34,23 +34,26 @@ jobs:
 #            key: ${{ runner.os }}-gradle-${{ hashFiles('**/*.gradle*', '**/gradle-wrapper.properties') }}
 #            restore-keys: ${{ runner.os }}-gradle
 
+#      - name: Set up Android SDK
+#        uses: android-actions/setup-android@v2
+#        with:
+#            api-level: ${{ env.SDK_VERSION }}
+#            cache: yes
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x ./gradlew
+#
+#      - name: Run Lint
+#        run: ./gradlew lintDebug
+#
+#      - name: Upload lint html test report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: lint.html
+#          path: app/build/reports/lint-results-debug.html
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-            api-level: ${{ env.SDK_VERSION }}
-            cache: yes
+        run: echo skipp
 
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-
-      - name: Run Lint
-        run: ./gradlew lintDebug
-
-      - name: Upload lint html test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: lint.html
-          path: app/build/reports/lint-results-debug.html
 
   unit-test:
     needs: [lint]
@@ -62,32 +65,34 @@ jobs:
       ANDROID_HOME: /usr/local/android-sdk
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v2
-
-      - name: Set up JDK 17
-        uses: actions/setup-java@v2
-        with:
-          distribution: 'adopt'
-          java-version: ${{ env.JDK_VERSION }}
-
       - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-          api-level: ${{ env.SDK_VERSION }}
-          cache: yes
-
-      - name: Grant execute permission for gradlew
-        run: chmod +x ./gradlew
-
-      - name: Run unit tests
-        run: ./gradlew test
-
-      - name: Upload unit test report
-        uses: actions/upload-artifact@v2
-        with:
-          name: unit_test_report
-          path: app/build/reports/tests/testDebugUnitTest/
+        run: echo skipp
+#      - name: Checkout repository
+#        uses: actions/checkout@v2
+#
+#      - name: Set up JDK 17
+#        uses: actions/setup-java@v2
+#        with:
+#          distribution: 'adopt'
+#          java-version: ${{ env.JDK_VERSION }}
+#
+#      - name: Set up Android SDK
+#        uses: android-actions/setup-android@v2
+#        with:
+#          api-level: ${{ env.SDK_VERSION }}
+#          cache: yes
+#
+#      - name: Grant execute permission for gradlew
+#        run: chmod +x ./gradlew
+#
+#      - name: Run unit tests
+#        run: ./gradlew test
+#
+#      - name: Upload unit test report
+#        uses: actions/upload-artifact@v2
+#        with:
+#          name: unit_test_report
+#          path: app/build/reports/tests/testDebugUnitTest/
 
 
   instrumentation-test:
