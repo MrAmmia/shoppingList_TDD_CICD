@@ -114,17 +114,18 @@ jobs:
           distribution: 'adopt'
           java-version: ${{ env.JDK_VERSION }}
 
+      - name: Install JAXB
+        run: |
+          sdkmanager "extras;oracle;m2repository"
+          mkdir -p $HOME/.m2/repository/com/sun/xml/bind
+          cp -r $ANDROID_HOME/extras/oracle/m2repository/com/sun/xml/bind/* $HOME/.m2/repository/com/sun/xml/bind/
+
       - name: Set up Android SDK
         run: |
           brew install --cask android-sdk
           yes | sdkmanager --licenses
           sdkmanager "platform-tools" "platforms;android-${{ env.SDK_VERSION }}" "build-tools;${{ env.SDK_VERSION }}.0.0"
 
-      - name: Install JAXB
-        run: |
-          sdkmanager "extras;oracle;m2repository"
-          mkdir -p $HOME/.m2/repository/com/sun/xml/bind
-          cp -r $ANDROID_HOME/extras/oracle/m2repository/com/sun/xml/bind/* $HOME/.m2/repository/com/sun/xml/bind/
 
 #      - name: Start emulator
 #        uses: reactivecircus/android-emulator-runner@v2
