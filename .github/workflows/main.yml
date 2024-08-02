@@ -110,6 +110,10 @@ jobs:
       - name: Install System Image
         run: |
           yes | sdkmanager --install "system-images;android-33;google_apis;x86_64" --channel=0
+      
+      - name: Install Emulator
+        run: sdkmanager --install 'emulator'
+
 
       - name: Create AVD
         run: echo no | avdmanager create avd -n test -k 'system-images;android-33;google_apis;x86_64' --force
