@@ -99,10 +99,10 @@ jobs:
     needs: [ unit-test ]
     runs-on: ubuntu-latest
 
-#    env:
-#      SDK_VERSION: 33
-#      JDK_VERSION: 17
-#      ANDROID_HOME: $HOME/Library/Android/sdk
+    env:
+      SDK_VERSION: 33
+      JDK_VERSION: 17
+      ANDROID_HOME: $HOME/Library/Android/sdk
 
     steps:
       - name: Checkout repository
