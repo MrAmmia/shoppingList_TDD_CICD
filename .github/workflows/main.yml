@@ -116,6 +116,13 @@ jobs:
 
       - name: Set up Android SDK
         uses: android-actions/setup-android@v2
+        with:
+          api-level: 34
+          build-tools: 34.0.0
+
+      - name: Install System Image
+        run: |
+          yes | sdkmanager --install "system-images;android-34;google_apis;x86_64" --channel=0
 
 #      - name: Set up Android SDK
 #        run: |
