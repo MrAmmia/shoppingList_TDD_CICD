@@ -86,24 +86,9 @@ jobs:
      runs-on: macos-latest
 
      steps:
-       - name: Android Emulator Runner
-         uses: ReactiveCircus/android-emulator-runner@v2.32.0
-         with:
-           api-level: 29
-           target: default
-           arch: x86
-           profile: Nexus 6
-           cores: 2
-           ram-size: 2048M
-           heap-size: 512M
-           avd-name: test
-           force-avd-creation: true
-           emulator-boot-timeout: 600
-           emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
-           disable-spellchecker: true
-           disable-linux-hw-accel: auto
-           script: ./gradlew connectedCheck
-        
+       - name: Android Emulator (faruktoptas)
+         uses: faruktoptas/android-github-actions-emulator@1.1.0
+         
        - name: Upload test report
          uses: actions/upload-artifact@v2
          with:
