@@ -99,6 +99,7 @@ jobs:
            avd-name: test
            force-avd-creation: true
            emulator-boot-timeout: 600
+           emulator-port: 5037
            emulator-options: -no-window -gpu swiftshader_indirect -no-snapshot -noaudio -no-boot-anim
            disable-spellchecker: true
            disable-linux-hw-accel: auto
