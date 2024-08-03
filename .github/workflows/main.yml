@@ -83,22 +83,17 @@ jobs:
 
   instrumented-test:
      needs: [ unit-test ]
-     runs-on: ubuntu-latest
-
-     env:
-       SDK_VERSION: 33
-       JDK_VERSION: 17
-       ANDROID_HOME: /usr/local/android-sdk
+     runs-on: macos-latest
 
      steps:
-       - name: Checkout repository
-         uses: actions/checkout@v2
+       - name: checkout
+         uses: actions/checkout@v3
 
-       - name: Grant execute permission for gradlew
-         run: chmod +x ./gradlew
-
-       - name: Android Emulator (faruktoptas)
-         uses: faruktoptas/android-github-actions-emulator@1.1.0
+       - name: run tests
+         uses: reactivecircus/android-emulator-runner@v2
+         with:
+           api-level: 29
+           script: ./gradlew connectedCheck
          
        - name: Upload test report
          uses: actions/upload-artifact@v2
