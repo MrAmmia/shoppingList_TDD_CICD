@@ -83,7 +83,7 @@ jobs:
 
   instrumented-test:
      needs: [ unit-test ]
-     runs-on: macos-latest
+     runs-on: ubuntu-latest
 
      steps:
        - name: Android Emulator (faruktoptas)
