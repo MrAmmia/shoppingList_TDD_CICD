@@ -85,7 +85,30 @@ jobs:
      needs: [ unit-test ]
      runs-on: ubuntu-latest
 
+     env:
+       SDK_VERSION: 33
+       JDK_VERSION: 17
+       ANDROID_HOME: /usr/local/android-sdk
+
      steps:
+       - name: Checkout repository
+         uses: actions/checkout@v2
+
+       - name: Set up JDK 17
+         uses: actions/setup-java@v2
+         with:
+           distribution: 'adopt'
+           java-version: ${{ env.JDK_VERSION }}
+  
+       - name: Set up Android SDK
+         uses: android-actions/setup-android@v2
+         with:
+           api-level: ${{ env.SDK_VERSION }}
+           cache: yes
+  
+       - name: Grant execute permission for gradlew
+         run: chmod +x ./gradlew
+
        - name: Android Emulator (faruktoptas)
          uses: faruktoptas/android-github-actions-emulator@1.1.0
          
