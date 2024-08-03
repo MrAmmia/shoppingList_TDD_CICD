@@ -89,7 +89,7 @@ jobs:
        - name: Android Emulator Runner
          uses: ReactiveCircus/android-emulator-runner@v2.32.0
          with:
-           api-level: 34
+           api-level: 29
            target: default
            arch: x86
            profile: Nexus 6
