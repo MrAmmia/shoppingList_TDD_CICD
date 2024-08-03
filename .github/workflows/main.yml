@@ -81,9 +81,9 @@ jobs:
           name: unit_test_report
           path: app/build/reports/tests/testDebugUnitTest/
 
-  ui-test:
+  instrumented-test:
      needs: [ unit-test ]
-     runs-on: ubuntu-latest
+     runs-on: macos-latest
 
      steps:
        - name: Android Emulator Runner
@@ -111,7 +111,7 @@ jobs:
           path: app/build/reports/androidTests/connected/
           
   build:
-    needs: [ui-test]
+    needs: [instrumented-test]
     name: Generate APK
     runs-on: ubuntu-latest
 
