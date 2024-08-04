@@ -95,33 +95,28 @@ jobs:
           distribution: 'adopt'
           java-version: '17'
 
-      - name: Set up Android SDK
-        uses: android-actions/setup-android@v2
-        with:
-            api-level: 34
-
   
       - name: Install Android SDK
         run: |
           sudo apt-get update
-          sudo apt-get install -y wget unzip
+          sudo apt-get install -y wget unzip lib32stdc++6 lib32z1
           wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
           mkdir -p $HOME/android-sdk/cmdline-tools
-          unzip -d $HOME/android-sdk/cmdline-tools commandlinetools-linux-8092744_latest.zip
+          unzip commandlinetools-linux-8092744_latest.zip -d $HOME/android-sdk/cmdline-tools
+          mv $HOME/android-sdk/cmdline-tools/cmdline-tools $HOME/android-sdk/cmdline-tools/tools
           export ANDROID_SDK_ROOT=$HOME/android-sdk
           export PATH=$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$PATH
           export PATH=$ANDROID_SDK_ROOT/emulator:$PATH
           export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
           yes | sdkmanager --licenses
-          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3" "emulator" "system-images;android-30;google_apis;x86"
+          sdkmanager --install "platform-tools" "platforms;android-30" "build-tools;30.0.3" "emulator" "system-images;android-30;google_apis;x86_64"
           echo "sdk.dir=$ANDROID_SDK_ROOT" > $GITHUB_WORKSPACE/local.properties
   
       - name: Start Emulator
         run: |
           sudo apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
-          echo "no" | sdkmanager --install "system-images;android-30;google_apis;x86"
-          avdmanager create avd -n test -k "system-images;android-30;google_apis;x86" --device "pixel"
-          nohup emulator -avd test -no-audio -no-boot-anim -gpu swiftshader_indirect &
+          avdmanager create avd -n test -k "system-images;android-30;google_apis;x86_64" --device "pixel"
+          nohup emulator -avd test -no-audio -no-boot-anim -no-window -gpu swiftshader_indirect &
           adb wait-for-device
           adb shell input keyevent 82 &
 
