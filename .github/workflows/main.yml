@@ -94,6 +94,12 @@ jobs:
         with:
           distribution: 'adopt'
           java-version: '17'
+
+      - name: Set up Android SDK
+        uses: android-actions/setup-android@v2
+        with:
+            api-level: 34
+
   
       - name: Install Android SDK
         run: |
