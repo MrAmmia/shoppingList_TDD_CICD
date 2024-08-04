@@ -117,6 +117,9 @@ jobs:
           sdkmanager --install "platform-tools" "platforms;android-30" "build-tools;30.0.3" "emulator" "system-images;android-30;google_apis;x86_64"
           echo "sdk.dir=$ANDROID_SDK_ROOT" > $GITHUB_WORKSPACE/local.properties
   
+      - name: List Available System Images
+        run: sdkmanager --list
+      
       - name: Start Emulator
         run: |
           sudo apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
