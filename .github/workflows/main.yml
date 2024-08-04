@@ -100,17 +100,20 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y wget unzip
           wget https://dl.google.com/android/repository/commandlinetools-linux-8092744_latest.zip
-          unzip commandlinetools-linux-8092744_latest.zip -d $HOME/android-sdk
-          yes | $HOME/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk --licenses
-          $HOME/android-sdk/cmdline-tools/bin/sdkmanager --sdk_root=$HOME/android-sdk "platform-tools" "platforms;android-30" "build-tools;30.0.3"
-          echo "sdk.dir=$HOME/android-sdk" > $GITHUB_WORKSPACE/local.properties
+          mkdir -p $HOME/android-sdk/cmdline-tools
+          unzip -d $HOME/android-sdk/cmdline-tools commandlinetools-linux-8092744_latest.zip
+          export ANDROID_SDK_ROOT=$HOME/android-sdk
+          export PATH=$ANDROID_SDK_ROOT/cmdline-tools/tools/bin:$PATH
+          export PATH=$ANDROID_SDK_ROOT/platform-tools:$PATH
+          yes | sdkmanager --licenses
+          sdkmanager "platform-tools" "platforms;android-30" "build-tools;30.0.3" "system-images;android-30;google_apis;x86"
+          echo "sdk.dir=$ANDROID_SDK_ROOT" > $GITHUB_WORKSPACE/local.properties
   
       - name: Start Emulator
         run: |
           sudo apt-get install -y qemu-kvm libvirt-daemon-system libvirt-clients bridge-utils
           echo "no" | sdkmanager --install "system-images;android-30;google_apis;x86"
-          echo "no" | sdkmanager --install "system-images;android-30;default;x86"
-          emulator -list-avds
+          avdmanager create avd -n test -k "system-images;android-30;google_apis;x86" --device "pixel"
           emulator -avd test -no-audio -no-boot-anim -gpu swiftshader_indirect &
           adb wait-for-device
           adb shell input keyevent 82 &
