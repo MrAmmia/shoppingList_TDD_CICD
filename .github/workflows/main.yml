@@ -100,7 +100,12 @@ jobs:
         with:
             api-level: 30
 
-  
+      - name: Kill ADB server
+        run: adb kill-server  
+
+      - name: Start ADB server
+        run: adb start-server  
+      
       - name: Android Emulator Runner
         # You may pin to the exact commit or the version.
         # uses: ReactiveCircus/android-emulator-runner@f0d1ed2dcad93c7479e8b2f2226c83af54494915
