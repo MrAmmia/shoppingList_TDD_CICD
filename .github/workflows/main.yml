@@ -133,8 +133,8 @@ jobs:
       - name: Start emulator
         run: |
           Start-Process -FilePath "$env:ANDROID_SDK_ROOT\emulator\emulator.exe" -ArgumentList '-avd test -no-audio -no-window -no-boot-anim -gpu off' -NoNewWindow -PassThru
+          Start-Sleep -Seconds 60
           adb shell input keyevent 82
-#          Start-Sleep -Seconds 60
 #          adb wait-for-device
           
 
