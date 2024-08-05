@@ -104,6 +104,14 @@ jobs:
           profile: windows
           emulator: true
 
+
+      - name: Install Android SDK and System Image
+        run: |
+          sdkmanager --install "system-images;android-29;default;x86_64"
+          sdkmanager --install "platforms;android-29"
+          sdkmanager --install "platform-tools"
+          sdkmanager --install "emulator"
+      
       - name: Download dependencies
         run: ./gradlew build --stacktrace
 
