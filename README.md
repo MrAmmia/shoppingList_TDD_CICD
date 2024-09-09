@@ -68,7 +68,3 @@ The project uses GitHub Actions for CI/CD, with workflows defined for:
 ## Contributing
 
 Contributions are welcome! Please feel free to submit issues, fork the repository, and open pull requests.
-
-## License
-
-This project is licensed under the MIT License. You can view the full license [here](./LICENSE).
