@@ -31,3 +31,44 @@ _Add screenshots of your app here._
    ```bash
    git clone https://github.com/MrAmmia/shoppingList_TDD_CICD.git
    cd shoppingList_TDD_CICD
+
+2. Get an API key from Pixabay and add it to your local.properties file:
+   ```bash
+   PIXABAY_API_KEY=your_api_key
+
+3. Build the project in Android Studio or using Gradle:
+   ```bash
+   ./gradlew build
+
+4. Run the tests:
+   ```bash
+   ./gradlew test
+
+5. Generate the APK and Lint report
+   CI/CD is set up using GitHub Actions. Upon pushing to the main branch, the app will automatically be built, tested, and necessary reports generated.
+
+
+## Testing
+
+This project uses TDD principles. Unit tests and UI tests have been written to ensure the functionality and quality of the code.
+1. Unit Tests: Located in the src/test directory.
+2. UI Tests: Located in the src/androidTest directory.
+Run all tests using:
+   ```bash
+   ./gradlew test
+   ./gradlew connectedAndroidTest
+
+
+## CI/CD
+
+The project uses GitHub Actions for CI/CD, with workflows defined for:
+1. Running tests on every push and pull request.
+2. Automatically building the app when code is merged into the main branch
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit issues, fork the repository, and open pull requests.
+
+## License
+
+This project is licensed under the MIT License. You can view the full license [here](./LICENSE).
