@@ -21,10 +21,6 @@ This is an Android application that stores shopping lists in a Room database, fe
 - **Testing**: JUnit, Espresso (for UI testing), Mockito
 - **CI/CD**: GitHub Actions
 
-## Screenshots
-
-_Add screenshots of your app here._
-
 ## Setup Instructions
 
 1. Clone the repository:
